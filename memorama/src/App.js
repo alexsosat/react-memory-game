@@ -39,19 +39,13 @@ const randomizer = () => {
 
 const pairOfPokemons = randomizer();
 
+let index1 = undefined, index2 = undefined;
+
 export default function App() {
 
 
   const [openCard, setOpenCard] = useState([]);
   const [matched, setMatched] = useState([]);
-
-
-
-
-
-
-
-
 
 
   const handleFlip = index => {
@@ -68,7 +62,6 @@ export default function App() {
       setMatched([...matched, firstMatch.id])
     }
     if (openCard.length === 2) setTimeout(() => setOpenCard([]), 1000);
-    console.log({ firstMatch });
   }, [openCard])
 
   return (
@@ -87,7 +80,23 @@ export default function App() {
           return <div className={`pokemon-card ${flipCard ? "flipped" : ""}`}
             key={index}
             onClick={() => {
-              if (openCard.length < 2) handleFlip(index);
+              if (openCard.length < 2) {
+                if (index1 === undefined) {
+                  index1 = index;
+                  handleFlip(index);
+                }
+                else if (index2 === undefined) {
+                  index2 = index;
+                  if (index2 != index1) {
+                    handleFlip(index);
+                    index1 = index2 = undefined;
+                  }
+                  else {
+                    console.log("No cheating");
+                    index2 = undefined;
+                  }
+                }
+              }
             }}
           >
             <div className="inner">
