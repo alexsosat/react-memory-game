@@ -4,20 +4,54 @@ import { cleanup } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import "./styles.css";
 
+const url = "https://pokeres.bastionbot.org/images/pokemon"
+
+const pokemons = [
+  { id: 3, name: "Venusaur" },
+  { id: 6, name: "Blastoise" },
+  { id: 9, name: "Charizard" },
+  { id: 100, name: "Voltorb" },
+  { id: 135, name: "Joltreon" },
+  { id: 72, name: "Tentacool" },
+  { id: 37, name: "Vulpix" },
+  { id: 10, name: "Caterpie" },
+  { id: 149, name: "Dragonite" },
+  { id: 61, name: "Poliwhirl" },
+  { id: 66, name: "Machop" },
+  { id: 127, name: "Pinsir" },
+  { id: 146, name: "Moltres" },
+  { id: 111, name: "Rhyhorn" },
+  { id: 142, name: "Aerodactyl" },
+  { id: 151, name: "Mew" },
+];
+
+//making pairs of each card and random the content
+const randomizer = () => {
+  let returnable = [...pokemons, ...pokemons];
+  for (let i = 0; i < returnable.length; i++) {
+    let temp = returnable[i];
+    let randomIndex = Math.floor(Math.random() * (returnable.length - i)) + i;
+    returnable[i] = returnable[randomIndex];
+    returnable[randomIndex] = temp;
+  }
+  return returnable;
+}
+
+const pairOfPokemons = randomizer();
+
 export default function App() {
-  const url = "https://pokeres.bastionbot.org/images/pokemon"
+
 
   const [openCard, setOpenCard] = useState([]);
   const [matched, setMatched] = useState([]);
 
-  const pokemons = [
-    { id: 3, name: "Venusaur" },
-    { id: 6, name: "Blastoise" },
-    { id: 9, name: "Charizard" }
-  ];
 
-  //making pairs of each card
-  const pairOfPokemons = [...pokemons, ...pokemons];
+
+
+
+
+
+
 
 
   const handleFlip = index => {
