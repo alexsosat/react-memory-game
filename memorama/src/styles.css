@@ -87,3 +87,7 @@ p strong {
   color: #fff;
   transform: scale(1.02);
 }
+
+.hidden{
+  visibility: hidden;
+}

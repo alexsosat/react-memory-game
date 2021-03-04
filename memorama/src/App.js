@@ -59,7 +59,8 @@ export default function App() {
     const secondMatch = pairOfPokemons[openCard[1]];
 
     if (secondMatch && firstMatch.id === secondMatch.id) {
-      setMatched([...matched, firstMatch.id])
+      //setMatched([...matched, firstMatch.id])
+      setTimeout(() => setMatched([...matched, firstMatch.id]), 1000)
     }
     if (openCard.length === 2) setTimeout(() => setOpenCard([]), 1000);
   }, [openCard])
@@ -72,12 +73,15 @@ export default function App() {
           let flipCard;
           flipCard = false;
 
+          let matchedCard;
+          matchedCard = false;
+
           //if open Cards has index of current card then open the card
           if (openCard.includes(index)) flipCard = true;
 
-          if (matched.includes(pokemon.id)) flipCard = true;
+          if (matched.includes(pokemon.id)) matchedCard = true;
 
-          return <div className={`pokemon-card ${flipCard ? "flipped" : ""}`}
+          return <div className={`pokemon-card ${matchedCard ? "hidden" : ""} ${flipCard ? "flipped" : ""}`}
             key={index}
             onClick={() => {
               if (openCard.length < 2) {
